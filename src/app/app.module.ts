@@ -3,11 +3,21 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { AngularFireModule } from 'angularfire2';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { CadastroUsuarioPage } from "../pages/cadastro-usuario/cadastro-usuario";
 import { LoginPage } from "../pages/login/login";
+
+const config = {
+  apiKey: "AIzaSyB4ENw8lrTcVmpOrlQmjRbWS4IxyfEeSvQ",
+  authDomain: "chat-senac.firebaseapp.com",
+  databaseURL: "https://chat-senac.firebaseio.com",
+  projectId: "chat-senac",
+  storageBucket: "chat-senac.appspot.com",
+  messagingSenderId: "764069440039"
+};
 
 @NgModule({
   declarations: [
@@ -18,7 +28,8 @@ import { LoginPage } from "../pages/login/login";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
