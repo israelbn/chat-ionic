@@ -9,6 +9,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { CadastroUsuarioPage } from "../pages/cadastro-usuario/cadastro-usuario";
 import { LoginPage } from "../pages/login/login";
+import { UsuarioServiceProvider } from '../providers/usuario/usuario.service';
+import { HttpModule } from "@angular/http";
 
 const config = {
   apiKey: "AIzaSyB4ENw8lrTcVmpOrlQmjRbWS4IxyfEeSvQ",
@@ -27,6 +29,7 @@ const config = {
     LoginPage
   ],
   imports: [
+    HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config)
@@ -41,7 +44,8 @@ const config = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UsuarioServiceProvider
   ]
 })
 export class AppModule {}

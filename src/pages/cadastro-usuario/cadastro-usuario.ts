@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { UsuarioServiceProvider } from "../../providers/usuario/usuario.service";
 
 /**
  * Generated class for the CadastroUsuarioPage page.
@@ -21,7 +22,8 @@ export class CadastroUsuarioPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public usuarioService: UsuarioServiceProvider
   ) {
     this.cadastroForm = this.formBuilder.group({
       nome: ['', [Validators.required]],
@@ -37,7 +39,12 @@ export class CadastroUsuarioPage {
   }
 
   onSubmit(): void {
-    console.log("conta criada")
+    console.log(this.cadastroForm.value);
+    this.usuarioService.create(
+      this.cadastroForm.value
+    ).then(() => {
+      console.log('Usuário cadastrado!');
+    });
   }
 
 }
