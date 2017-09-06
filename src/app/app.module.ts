@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -11,6 +11,7 @@ import { CadastroUsuarioPage } from "../pages/cadastro-usuario/cadastro-usuario"
 import { LoginPage } from "../pages/login/login";
 import { UsuarioServiceProvider } from '../providers/usuario/usuario.service';
 import { HttpModule } from "@angular/http";
+import { AuthServiceProvider } from '../providers/auth/auth.service';
 
 const config = {
   apiKey: "AIzaSyB4ENw8lrTcVmpOrlQmjRbWS4IxyfEeSvQ",
@@ -20,6 +21,11 @@ const config = {
   storageBucket: "chat-senac.appspot.com",
   messagingSenderId: "764069440039"
 };
+
+const firebaseAuthConfig = {
+  provider: AuthProviders.Custom,
+  method: AuthMethods.Password
+}
 
 @NgModule({
   declarations: [
@@ -32,7 +38,10 @@ const config = {
     HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(config)
+    AngularFireModule.initializeApp(
+      config, 
+      firebaseAuthConfig
+    )
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,7 +54,8 @@ const config = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UsuarioServiceProvider
+    UsuarioServiceProvider,
+    AuthServiceProvider
   ]
 })
 export class AppModule {}
