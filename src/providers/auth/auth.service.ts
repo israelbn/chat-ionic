@@ -40,4 +40,8 @@ export class AuthServiceProvider
         }).catch(this.handlePromiseError);
     }
 
+    // Deslogar usuário do Firebase
+    logout(): Promise<void> {
+      return this.auth.logout();
+    }
 }
