@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { AngularFire } from "angularfire2";
+import { AngularFire, FirebaseListObservable } from "angularfire2";
 import { User } from "../../models/user.model";
+import { BaseService } from "../base/base.service";
 
 /*
   Generated class for the UsuarioProvider provider.
@@ -11,17 +12,21 @@ import { User } from "../../models/user.model";
   for more info on providers and Angular DI.
 */
 @Injectable()
-export class UsuarioServiceProvider {
+export class UsuarioServiceProvider extends BaseService{
+
+  users: FirebaseListObservable<User[]>;
 
   constructor(
     public af: AngularFire,
     public http: Http) {
+      super();
+      this.users = this.af.database.list('/users');
     
   }
 
   create(user: User): firebase.Promise<void> {
-    return this.af.database.list('/users')
-      .push(user);
+    return this.af.database.object(`/users/${user.uid}`).set(user)
+      .catch(this.handlePromiseError);
   }
 
 }

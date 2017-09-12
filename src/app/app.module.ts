@@ -17,7 +17,6 @@ const config = {
   apiKey: "AIzaSyB4ENw8lrTcVmpOrlQmjRbWS4IxyfEeSvQ",
   authDomain: "chat-senac.firebaseapp.com",
   databaseURL: "https://chat-senac.firebaseio.com",
-  projectId: "chat-senac",
   storageBucket: "chat-senac.appspot.com",
   messagingSenderId: "764069440039"
 };

@@ -15,22 +15,24 @@
 
 <ion-content padding>
 
-  <form>
+  <form [formGroup]="signinForm" (ngSubmit)="login(); $event.preventDefault()">
     
     <ion-item>
-      <ion-icon name="at" item-left></ion-icon>
-      <ion-input type="text" placeholder="Usuário">
+      <ion-icon name="mail" item-left></ion-icon>
+      <ion-input type="email" placeholder="E-mail" formControlName="email">
       </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-icon name="lock" item-left></ion-icon>
-      <ion-input type="password" placeholder="Senha">
+      <ion-input type="password" placeholder="Senha" formControlName="senha">
       </ion-input>
     </ion-item>
 
     <br>
-    <button ion-button full >Entrar</button>
+    <button ion-button full type="submit" [disabled]="signinForm.invalid">
+      Entrar
+    </button>
 
     <button ion-button full color="light" (click)="onCadastro()">
       Cadastre-se

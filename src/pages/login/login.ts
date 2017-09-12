@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { CadastroUsuarioPage } from "../cadastro-usuario/cadastro-usuario";
+import { HomePage } from "../home/home";
+import { AuthServiceProvider } from "../../providers/auth/auth.service";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 /**
  * Generated class for the LoginPage page.
@@ -16,7 +19,19 @@ import { CadastroUsuarioPage } from "../cadastro-usuario/cadastro-usuario";
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  signinForm: FormGroup;
+  
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    public authService: AuthServiceProvider,
+    public formBuilder: FormBuilder) {
+
+      this.signinForm = this.formBuilder.group({
+        email: ['', Validators.required],
+        senha: ['', Validators.required]
+      });
   }
 
   ionViewDidLoad() {
@@ -26,6 +41,25 @@ export class LoginPage {
   onCadastro(): void {
     this.navCtrl.
       push(CadastroUsuarioPage);
+  }
+
+  login(): void {
+    this.authService.signinWithEmail(this.signinForm.value)
+      .then((isLogged: boolean) => {
+        if(isLogged) {
+          this.navCtrl.setRoot(HomePage);
+        }
+      }).catch((error: any) => {
+        console.log(error);
+        this.showAlert(error);
+      });
+  }
+
+  private showAlert(message: string): void {
+    this.alertCtrl.create({
+      message: message,
+      buttons: ['OK']
+    }).present();
   }
 
 }
