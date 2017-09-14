@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { CadastroUsuarioPage } from "../cadastro-usuario/cadastro-usuario";
 import { HomePage } from "../home/home";
 import { AuthServiceProvider } from "../../providers/auth/auth.service";
@@ -26,11 +26,12 @@ export class LoginPage {
     public navParams: NavParams,
     public alertCtrl: AlertController,
     public authService: AuthServiceProvider,
-    public formBuilder: FormBuilder) {
+    public formBuilder: FormBuilder,
+    public loadingCtrl: LoadingController) {
 
       this.signinForm = this.formBuilder.group({
         email: ['', Validators.required],
-        senha: ['', Validators.required]
+        password: ['', Validators.required]
       });
   }
 
@@ -44,13 +45,17 @@ export class LoginPage {
   }
 
   login(): void {
+    let loading: Loading = this.showLoading();
+
     this.authService.signinWithEmail(this.signinForm.value)
       .then((isLogged: boolean) => {
         if(isLogged) {
           this.navCtrl.setRoot(HomePage);
+          loading.dismiss();
         }
       }).catch((error: any) => {
         console.log(error);
+        loading.dismiss();
         this.showAlert(error);
       });
   }
@@ -60,6 +65,15 @@ export class LoginPage {
       message: message,
       buttons: ['OK']
     }).present();
+  }
+
+  private showLoading(): Loading {
+    let loading: Loading = this.loadingCtrl.create({
+      content: 'Por favor aguarde...'
+    });
+
+    loading.present();
+    return loading;
   }
 
 }
