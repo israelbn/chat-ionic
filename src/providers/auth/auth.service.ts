@@ -45,4 +45,13 @@ export class AuthServiceProvider
     logout(): Promise<void> {
       return this.auth.logout();
     }
+
+    get authenticated(): Promise<boolean> {
+      return new Promise((resolve, reject) => {
+        this.auth
+          .subscribe((authState: FirebaseAuthState) => {
+            (authState) ? resolve(true) : reject(false);
+          });
+      });
+    }
 }
