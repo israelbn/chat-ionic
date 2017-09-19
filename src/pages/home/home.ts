@@ -5,6 +5,7 @@ import { AuthServiceProvider } from "../../providers/auth/auth.service";
 import { FirebaseListObservable } from "angularfire2";
 import { User } from "../../models/user.model";
 import { UsuarioServiceProvider } from "../../providers/usuario/usuario.service";
+import { ChatPage } from "../chat/chat";
 
 @Component({
   selector: 'page-home',
@@ -27,6 +28,7 @@ export class HomePage {
 
   onChatCreate(user: User): void {
     console.log('Usuário: ', user.nome);
+    this.navCtrl.push(ChatPage);
   }
 
   onAbrir(): void {

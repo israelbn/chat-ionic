@@ -12,6 +12,7 @@ import { LoginPage } from "../pages/login/login";
 import { UsuarioServiceProvider } from '../providers/usuario/usuario.service';
 import { HttpModule } from "@angular/http";
 import { AuthServiceProvider } from '../providers/auth/auth.service';
+import { ChatPage } from "../pages/chat/chat";
 
 const config = {
   apiKey: "AIzaSyB4ENw8lrTcVmpOrlQmjRbWS4IxyfEeSvQ",
@@ -31,7 +32,8 @@ const firebaseAuthConfig = {
     MyApp,
     HomePage,
     CadastroUsuarioPage,
-    LoginPage
+    LoginPage,
+    ChatPage
   ],
   imports: [
     HttpModule,
@@ -47,7 +49,8 @@ const firebaseAuthConfig = {
     MyApp,
     HomePage,
     CadastroUsuarioPage,
-    LoginPage
+    LoginPage,
+    ChatPage
   ],
   providers: [
     StatusBar,
