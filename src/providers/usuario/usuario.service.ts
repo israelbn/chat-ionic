@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { AngularFire, FirebaseListObservable, FirebaseAuthState } from "angularfire2";
+import { AngularFire, FirebaseListObservable, FirebaseAuthState, FirebaseObjectObservable } from "angularfire2";
 import { User } from "../../models/user.model";
 import { BaseService } from "../base/base.service";
 
@@ -15,12 +15,14 @@ import { BaseService } from "../base/base.service";
 export class UsuarioServiceProvider extends BaseService{
 
   users: FirebaseListObservable<User[]>;
+  currentUser: FirebaseObjectObservable<User>;
 
   constructor(
     public af: AngularFire,
     public http: Http) {
       super();
-      this.users = this.af.database.list('/users');
+      //this.users = this.af.database.list('/users');
+      this.listenAuthState();
     
   }
 

@@ -13,6 +13,7 @@ import { UsuarioServiceProvider } from '../providers/usuario/usuario.service';
 import { HttpModule } from "@angular/http";
 import { AuthServiceProvider } from '../providers/auth/auth.service';
 import { ChatPage } from "../pages/chat/chat";
+import { ChatServiceProvider } from '../providers/chat/chat.service';
 
 const config = {
   apiKey: "AIzaSyB4ENw8lrTcVmpOrlQmjRbWS4IxyfEeSvQ",
@@ -57,7 +58,8 @@ const firebaseAuthConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UsuarioServiceProvider,
-    AuthServiceProvider
+    AuthServiceProvider,
+    ChatServiceProvider
   ]
 })
 export class AppModule {}
