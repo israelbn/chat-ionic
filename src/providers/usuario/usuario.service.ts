@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { AngularFire, FirebaseListObservable, FirebaseAuthState, FirebaseObjectObservable } from "angularfire2";
+import { AngularFire, FirebaseListObservable, FirebaseAuthState, FirebaseObjectObservable, FirebaseApp } from "angularfire2";
 import { User } from "../../models/user.model";
 import { BaseService } from "../base/base.service";
 
@@ -18,6 +18,7 @@ export class UsuarioServiceProvider extends BaseService{
   currentUser: FirebaseObjectObservable<User>;
 
   constructor(
+    @Inject(FirebaseApp) public firebaseApp: any,
     public af: AngularFire,
     public http: Http) {
       super();
@@ -52,6 +53,24 @@ export class UsuarioServiceProvider extends BaseService{
         return users.filter((user: User) =>
           user.uid !== uidToExclude);
     });
+  }
+
+  edit(user: {
+    nome: string,
+    photo: string,
+    username: string
+    }): firebase.Promise<void>{
+    return this.currentUser
+      .update(user)
+      .catch(this.handlePromiseError);
+  }
+
+  uploadPhoto(file: File, userId: string): firebase.storage.UploadTask {
+    return this.firebaseApp
+      .storage()
+      .ref()
+      .child('/users/${userId}')
+      .put(file);
   }
 
 }
