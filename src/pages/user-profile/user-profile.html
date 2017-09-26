@@ -7,12 +7,42 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>user-profile</ion-title>
+    <ion-title>Perfil do usuário</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <user-info [user]="usuarioLogado"></user-info>
+
+  <button ion-button block (click)="canEdit = !canEdit">Editar</button>
+
+  <form (ngSubmit)="onSubmit($event)" *ngIf="canEdit" #profileForm="ngForm">
+    
+    <ion-item>
+      <ion-icon name="person" item-left></ion-icon>
+      <ion-input type="text" placeholder="Nome" name="nome"
+        [(ngModel)]="usuarioLogado.nome" required minLenght="3">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="at" item-left></ion-icon>
+      <ion-input type="text" placeholder="Usuário" name="usuario"
+        [(ngModel)]="usuarioLogado.usuario" required minLenght="3">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="image" item-left></ion-icon>
+      <input type="file" (change)="onPhoto($event)">
+    </ion-item>
+
+    <button ion-button block type="submit" 
+      [disable]="profileForm.form.invalid">Salvar</button>
+
+  </form>
 
 </ion-content>
