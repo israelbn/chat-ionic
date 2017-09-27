@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { User } from "../../models/user.model";
 import { UsuarioServiceProvider } from "../../providers/usuario/usuario.service";
 import { AuthServiceProvider } from "../../providers/auth/auth.service";
@@ -26,6 +26,8 @@ export class UserProfilePage {
     public userService: UsuarioServiceProvider,
     public authService: AuthServiceProvider,
     public navCtrl: NavController, 
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
     public navParams: NavParams) {
   }
 
@@ -37,6 +39,7 @@ export class UserProfilePage {
   }
 
   onSubmit(event: Event): void {
+    let loading: Loading = this.showLoading();
     event.preventDefault();
 
     if(this.filePhoto) {
@@ -52,6 +55,7 @@ export class UserProfilePage {
     } else {
       this.editUser();
     }
+    loading.dismiss();
   }
 
   private editUser(photoUrl?: string): void {
@@ -66,7 +70,22 @@ export class UserProfilePage {
   }
 
   onPhoto(event): void {
-    this.filePhoto = event.target.files(0);
+    this.filePhoto = event.target.files[0];
+  }
+
+  private showLoading(): Loading {
+    let loading: Loading = this.loadingCtrl.create({
+      content: 'Por favor aguarde...'
+    });
+    loading.present();
+    return loading;
+  }
+
+  private showAlert(message: string): void {
+    this.alertCtrl.create({
+      message: message,
+      buttons: ['Ok']
+    }).present();
   }
 
 }

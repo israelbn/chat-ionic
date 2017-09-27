@@ -1,5 +1,8 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
       Chat
     </ion-title>
@@ -9,10 +12,10 @@
 <ion-content padding>
   
   <ion-list>
-    <button ion-item *ngFor="let usuario of usuarios | async"
+    <button ion-item *ngFor="let usuario of usuarios | async" 
       (click)="onChatCreate(usuario)">
       {{ usuario.nome }}
     </button>
-  </ion-list>
+  </ion-list> 
 
 </ion-content>

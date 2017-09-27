@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -14,6 +14,9 @@ import { HttpModule } from "@angular/http";
 import { AuthServiceProvider } from '../providers/auth/auth.service';
 import { ChatPage } from "../pages/chat/chat";
 import { ChatServiceProvider } from '../providers/chat/chat.service';
+import { UserInfoComponent } from "../components/user-info/user-info";
+import { UserMenuComponent } from "../components/user-menu/user-menu";
+import { UserProfilePage } from "../pages/user-profile/user-profile";
 
 const config = {
   apiKey: "AIzaSyB4ENw8lrTcVmpOrlQmjRbWS4IxyfEeSvQ",
@@ -34,7 +37,10 @@ const firebaseAuthConfig = {
     HomePage,
     CadastroUsuarioPage,
     LoginPage,
-    ChatPage
+    ChatPage,
+    UserInfoComponent,
+    UserMenuComponent,
+    UserProfilePage
   ],
   imports: [
     HttpModule,
@@ -51,7 +57,8 @@ const firebaseAuthConfig = {
     HomePage,
     CadastroUsuarioPage,
     LoginPage,
-    ChatPage
+    ChatPage,
+    UserProfilePage
   ],
   providers: [
     StatusBar,

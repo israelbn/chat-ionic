@@ -1,4 +1,7 @@
-<ion-menu [content]="myContent">
+<ion-menu [content]="myContent" enabled="false" id="user-menu">
+    <ion-content>
+        <user-menu [user]="usuarioLogado"></user-menu>
+    </ion-content>
 
 </ion-menu>
 

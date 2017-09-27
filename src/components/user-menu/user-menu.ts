@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { User } from "../../models/user.model";
 import { AlertController, MenuController, App } from "ionic-angular";
 import { AuthServiceProvider } from "../../providers/auth/auth.service";
+import { BaseComponent } from "../base.component";
+import { UserProfilePage } from "../../pages/user-profile/user-profile";
 
 /**
  * Generated class for the UserMenuComponent component.
@@ -13,7 +15,7 @@ import { AuthServiceProvider } from "../../providers/auth/auth.service";
   selector: 'user-menu',
   templateUrl: 'user-menu.html'
 })
-export class UserMenuComponent {
+export class UserMenuComponent extends BaseComponent{
 
   @Input('user') usuarioLogado: User;
 
@@ -22,9 +24,12 @@ export class UserMenuComponent {
     public authService: AuthServiceProvider,
     public menuCtrl: MenuController,
     public app: App
-
   ) {
+    super(alertCtrl, authService, menuCtrl, app);
+  }
 
+  onProfile(): void {
+    this.navCtrl.push(UserProfilePage);
   }
 
 }

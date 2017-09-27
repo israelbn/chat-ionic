@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { CadastroUsuarioPage } from "../cadastro-usuario/cadastro-usuario";
 import { AuthServiceProvider } from "../../providers/auth/auth.service";
 import { FirebaseListObservable } from "angularfire2";
@@ -19,6 +19,7 @@ export class HomePage {
   usuarios: FirebaseListObservable<User[]>;
 
   constructor(
+    public menuCtrl: MenuController,
     public chatService: ChatServiceProvider,
     public usuarioService: UsuarioServiceProvider,
     public authService: AuthServiceProvider,
@@ -27,6 +28,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
+    this.menuCtrl.enable(true, 'user-menu');
     this.usuarios = this.usuarioService.users;
   }
 
