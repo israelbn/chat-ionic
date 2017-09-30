@@ -17,7 +17,7 @@ import { ChatServiceProvider } from '../providers/chat/chat.service';
 import { UserInfoComponent } from "../components/user-info/user-info";
 import { UserMenuComponent } from "../components/user-menu/user-menu";
 import { UserProfilePage } from "../pages/user-profile/user-profile";
-import { MensagemProvider } from '../providers/mensagem/mensagem';
+import { MensagemServiceProvider } from '../providers/mensagem/mensagem.service';
 
 const config = {
   apiKey: "AIzaSyB4ENw8lrTcVmpOrlQmjRbWS4IxyfEeSvQ",
@@ -68,7 +68,7 @@ const firebaseAuthConfig = {
     UsuarioServiceProvider,
     AuthServiceProvider,
     ChatServiceProvider,
-    MensagemProvider
+    MensagemServiceProvider
   ]
 })
 export class AppModule {}

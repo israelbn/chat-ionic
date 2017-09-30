@@ -18,6 +18,7 @@ export class HomePage {
 
   usuarios: FirebaseListObservable<User[]>;
   chats: FirebaseListObservable<Chat[]>;
+  view: string = 'chats';
 
   constructor(
     public menuCtrl: MenuController,
@@ -71,7 +72,7 @@ export class HomePage {
     this.usuarioService.get(recipientUserId)
       .subscribe((user: User) => {
         this.navCtrl.push(ChatPage, {
-          recipientUser: recipientUserId
+          recipientUser: user
         });
       });
   }
