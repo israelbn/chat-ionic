@@ -73,4 +73,9 @@ export class UsuarioServiceProvider extends BaseService{
       .put(file);
   }
 
+  get(userId: string): FirebaseObjectObservable<User> {
+    return <FirebaseObjectObservable<User>>this.af.database
+      .object(`/users/${userId}`);
+  }
+
 }
