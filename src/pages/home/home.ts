@@ -17,6 +17,7 @@ import firebase from "firebase";
 export class HomePage {
 
   usuarios: FirebaseListObservable<User[]>;
+  chats: FirebaseListObservable<Chat[]>;
 
   constructor(
     public menuCtrl: MenuController,
@@ -30,6 +31,7 @@ export class HomePage {
   ionViewDidLoad() {
     this.menuCtrl.enable(true, 'user-menu');
     this.usuarios = this.usuarioService.users;
+    this.chats = this.chatService.chats;
   }
 
   onChatCreate(user: User): void {

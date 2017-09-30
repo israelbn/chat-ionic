@@ -17,6 +17,7 @@ import { ChatServiceProvider } from '../providers/chat/chat.service';
 import { UserInfoComponent } from "../components/user-info/user-info";
 import { UserMenuComponent } from "../components/user-menu/user-menu";
 import { UserProfilePage } from "../pages/user-profile/user-profile";
+import { MensagemProvider } from '../providers/mensagem/mensagem';
 
 const config = {
   apiKey: "AIzaSyB4ENw8lrTcVmpOrlQmjRbWS4IxyfEeSvQ",
@@ -66,7 +67,8 @@ const firebaseAuthConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UsuarioServiceProvider,
     AuthServiceProvider,
-    ChatServiceProvider
+    ChatServiceProvider,
+    MensagemProvider
   ]
 })
 export class AppModule {}

@@ -12,9 +12,14 @@
 <ion-content padding>
   
   <ion-list>
-    <button ion-item *ngFor="let usuario of usuarios | async" 
-      (click)="onChatCreate(usuario)">
-      {{ usuario.nome }}
+    <button ion-item *ngFor="let c of chats | async">
+      <h2>{{c.title}}</h2>
+      <p *ngIf="c.lastMessage; else customMessage">
+        {{c.timestamp | date: 'dd/MM/y H:mm'}} - {{c.lastMessage}}
+      </p>
+      <ng-template #customMessage>
+        <p>Não tem mensagem</p>
+      </ng-template>
     </button>
   </ion-list> 
 
